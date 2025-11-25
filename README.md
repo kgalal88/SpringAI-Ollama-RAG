@@ -171,19 +171,9 @@ Edit `application.yml` to modify:
 
 ---
 
-## 🌱 Future Enhancements
+## 📄 Link to the full article @ medium.com
 
-* File upload endpoint for dynamic ingestion
-* Support for PostgreSQL/Redis vector stores
-* Chunking strategies
-* Metadata filtering
-* Streaming responses
-
----
-
-## 📄 License
-
-This project is open-source under the **Apache-2.0 License**.
+https://medium.com/@khalid.mtwaly/building-a-simple-rag-system-with-spring-ai-ollama-and-elasticsearch-a-deep-dive-into-the-code-a5d47ff59b3b
 
 ---
 
