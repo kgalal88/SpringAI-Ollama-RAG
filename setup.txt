@@ -1,0 +1,51 @@
+docker network create elastic
+docker pull docker.elastic.co/elasticsearch/elasticsearch:9.2.0
+docker run --name es01 --net elastic -p 9200:9200 -it -m 6GB -e "xpack.ml.use_auto_machine_memory_percent=true" docker.elastic.co/elasticsearch/elasticsearch:9.2.0
+
+
+
+ℹ️  Password for the elastic user (reset with `bin/elasticsearch-reset-password -u elastic`):
+  TKKCzKlUfgCP5EyHx42M
+
+ℹ️  HTTP CA certificate SHA-256 fingerprint:
+  d0495b1a202aa544bfdad2ec5108a5ae99fafcaa62883a7ce14db8a6006b9d4b
+
+ℹ️  Configure Kibana to use this cluster:
+• Run Kibana and click the configuration link in the terminal when Kibana starts.
+• Copy the following enrollment token and paste it into Kibana in your browser (valid for the next 30 minutes):
+  eyJ2ZXIiOiI4LjE0LjAiLCJhZHIiOlsiMTcyLjE5LjAuMjo5MjAwIl0sImZnciI6ImQwNDk1YjFhMjAyYWE1NDRiZmRhZDJlYzUxMDhhNWFlOTlmYWZjYWE2Mjg4M2E3Y2UxNGRiOGE2MDA2YjlkNGIiLCJrZXkiOiIxVFNQUEpvQnhJTXpkU2x3MkZ1LTp4SVd1VWU3Z21nZ1R3a3MyRXBEbHZBIn0=
+
+ℹ️ Configure other nodes to join this cluster:
+• Copy the following enrollment token and start new Elasticsearch nodes with `bin/elasticsearch --enrollment-token <token>` (valid for the next 30 minutes):
+  eyJ2ZXIiOiI4LjE0LjAiLCJhZHIiOlsiMTcyLjE5LjAuMjo5MjAwIl0sImZnciI6ImQwNDk1YjFhMjAyYWE1NDRiZmRhZDJlYzUxMDhhNWFlOTlmYWZjYWE2Mjg4M2E3Y2UxNGRiOGE2MDA2YjlkNGIiLCJrZXkiOiIxelNQUEpvQnhJTXpkU2x3MkZ1LTo1V0pBMU1Ga2FCQ1puQmdJYlFJZ2NnIn0=
+
+  If you're running in Docker, copy the enrollment token and run:
+  docker run -e "ENROLLMENT_TOKEN=eyJ2ZXIiOiI4LjE0LjAiLCJhZHIiOlsiMTcyLjE5LjAuMjo5MjAwIl0sImZnciI6ImQwNDk1YjFhMjAyYWE1NDRiZmRhZDJlYzUxMDhhNWFlOTlmYWZjYWE2Mjg4M2E3Y2UxNGRiOGE2MDA2YjlkNGIiLCJrZXkiOiIxelNQUEpvQnhJTXpkU2x3MkZ1LTo1V0pBMU1Ga2FCQ1puQmdJYlFJZ2NnIn0=" docker.elastic.co/elasticsearch/elasticsearch:9.2.0
+
+export ELASTIC_PASSWORD="TKKCzKlUfgCP5EyHx42M"
+docker cp es01:/usr/share/elasticsearch/config/certs/http_ca.crt .
+curl --cacert http_ca.crt -u elastic:$ELASTIC_PASSWORD https://localhost:9200
+docker exec -it es01 /usr/share/elasticsearch/bin/elasticsearch-create-enrollment-token -s node
+docker run -e ENROLLMENT_TOKEN="eyJ2ZXIiOiI4LjE0LjAiLCJhZHIiOlsiMTcyLjE5LjAuMjo5MjAwIl0sImZnciI6ImQwNDk1YjFhMjAyYWE1NDRiZmRhZDJlYzUxMDhhNWFlOTlmYWZjYWE2Mjg4M2E3Y2UxNGRiOGE2MDA2YjlkNGIiLCJrZXkiOiIyelNUUEpvQnhJTXpkU2x3S0Z0WjpDek16aW9kSXVXX0ctaTFjSnRMa2l3In0=" --name es02 --net elastic -it -m 1GB docker.elastic.co/elasticsearch/elasticsearch:9.2.0
+curl --cacert http_ca.crt -u elastic:$ELASTIC_PASSWORD https://localhost:9200/_cat/nodes
+
+docker pull docker.elastic.co/kibana/kibana:9.2.0
+docker run --name kib01 -d --net elastic -p 5601:5601 docker.elastic.co/kibana/kibana:9.2.0
+
+cd "C:\Users\khali\.jdks\openjdk-24.0.2+12-54\lib\security"
+"C:\Users\khali\.jdks\openjdk-24.0.2+12-54\bin\keytool" -import -trustcacerts -alias elastic-cert -file D:/materials/Ollama/ollama-ai-api/http_ca.crt -keystore cacerts -storepass changeit
+
+keytool -import -alias elastic-cert -file /usr/local/share/ca-certificates/http_ca.crt -keystore $JAVA_HOME/lib/security/cacerts -storepass ${KEYSTORE_PASS} -noprompt -trustcacerts
+
+------------------------------------------------------
+docker run -d --name elasticsearch --net elastic \
+  -p 9200:9200 \
+  -e "discovery.type=single-node" \
+  -e "xpack.security.enabled=false" \
+  -e "xpack.security.http.ssl.enabled=false" \
+  docker.elastic.co/elasticsearch/elasticsearch:9.2.0
+
+docker run --name kib01 -d --net elastic -p 5601:5601 docker.elastic.co/kibana/kibana:9.2.0
+
+docker build -t chat-rag-ollama:latest .
+docker run -d -p 9092:8080 --name my-ai-rag-ollama-app --net elastic chat-rag-ollama:latest

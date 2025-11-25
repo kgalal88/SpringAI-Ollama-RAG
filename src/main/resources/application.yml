@@ -1,0 +1,17 @@
+spring:
+  elasticsearch:
+    uris: ${ELASTIC_URL:http://localhost:9200}
+  ai:
+    ollama:
+      base-url: ${OLLAMA_URL:http://localhost:11434}
+      chat:
+        options:
+          model: gemma3:12b
+          temperature: 0.8
+      model: mxbai-embed-large
+    vectorstore:
+      elasticsearch:
+        initialize-schema: true
+        index-name: custom-index
+        dimensions: 1024
+        similarity: cosine
