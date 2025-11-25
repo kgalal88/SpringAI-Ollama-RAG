@@ -63,14 +63,25 @@ ollama pull llama3
 ```bash
 ollama run llama3
 ```
-
-4. **Build the Project**
+4. **Run Elastic Search & Kibana**
+```
+docker run -d --name elasticsearch --net elastic \
+  -p 9200:9200 \
+  -e "discovery.type=single-node" \
+  -e "xpack.security.enabled=false" \
+  -e "xpack.security.http.ssl.enabled=false" \
+  docker.elastic.co/elasticsearch/elasticsearch:9.2.0
+```
+```
+docker run --name kib01 -d --net elastic -p 5601:5601 docker.elastic.co/kibana/kibana:9.2.0
+```
+5**Build the Project**
 
 ```bash
 mvn clean package -DskipTests
 ```
 
-5. **Run the Spring Boot Application**
+6**Run the Spring Boot Application**
 
 ```bash
 java -jar target/springai-ollama-rag.jar
@@ -120,13 +131,13 @@ Example Response:
 To build the container:
 
 ```bash
-docker build -t springai-rag .
+docker build -t chat-rag-ollama:latest .
 ```
 
 To run:
 
 ```bash
-docker run -p 8080:8080 springai-rag
+docker run -d -p 9092:8080 --name my-ai-rag-ollama-app --net elastic chat-rag-ollama:latest
 ```
 
 > Ensure that the container can reach your **local Ollama instance**. You may need to expose Ollama with `OLLAMA_HOST=0.0.0.0`.
@@ -176,3 +187,5 @@ This project is open-source under the **Apache-2.0 License**.
 ## 👤 Author
 
 **Khalid Galal**
+
+**https://www.linkedin.com/in/khalidgalal**
