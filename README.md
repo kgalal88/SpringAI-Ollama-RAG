@@ -7,7 +7,6 @@ A minimal **Retrieval-Augmented Generation (RAG)** example built with **Spring B
 * Retrieve relevant context from a vector store
 * Augment a model prompt with retrieved context
 * Provide an API for answering user questions over your data
-  
 ![17641062659888672050472294897196](https://github.com/user-attachments/assets/3bc1683b-3972-4f0d-bf6c-90eacd7bb15e)
 
 ---
