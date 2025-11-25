@@ -91,6 +91,22 @@ java -jar target/springai-ollama-rag.jar
 
 ## 📚 API Endpoints
 
+### **POST /api/rag/ingestPdf**
+
+Send a question and receive an answer augmented with indexed context.
+
+Example Request:
+
+```json
+file=@"/D:/materials/Khalid_Elmetwally.pdf
+```
+
+Example Response:
+
+```json
+PDF ingested successfully! File: Khalid_Elmetwally.pdf
+```
+
 ### **POST /api/rag/query**
 
 Send a question and receive an answer augmented with indexed context.
@@ -99,7 +115,7 @@ Example Request:
 
 ```json
 {
-  "query": "What is in the repository?"
+  "query": "Who is Khalid Elmetwally?"
 }
 ```
 
@@ -107,7 +123,8 @@ Example Response:
 
 ```json
 {
-  "answer": "This project contains a Spring Boot RAG example..."
+  "answer": "According to the document, Khalid Elmetwally is a Google Cloud (GCP) Certified Professional Cloud Architect with 15+ years of experience in designing and implementing software solutions. He currently works as a Software Solutions Architect at Saudi Telecom Company (STC Group) in Riyadh, Saudi Arabia.
+Found at page: 1 of the manual Khalid_Elmetwally.pdf"
 }
 ```
 
@@ -147,11 +164,16 @@ docker run -d -p 9092:8080 --name my-ai-rag-ollama-app --net elastic chat-rag-ol
 ## 🧪 Testing the RAG Flow
 
 You can test via Postman, curl, or any HTTP tool:
-
+**Document Ingestion (Embeding)**
 ```bash
-curl -X POST http://localhost:8080/api/rag/query \
-  -H "Content-Type: application/json" \
-  -d '{"query": "Explain the RAG architecture."}'
+curl --location 'http://localhost:9092/rag/ingestPdf' \
+--form 'file=@"/D:/materials/Khalid_Elmetwally.pdf"'
+```
+**Query LLM**
+```bash
+curl --location 'http://localhost:9092/rag/query' \
+--header 'Content-Type: text/plain' \
+--data 'Who is Khalid Elmetwally?'
 ```
 
 ---
