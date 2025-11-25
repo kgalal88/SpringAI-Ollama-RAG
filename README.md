@@ -75,13 +75,13 @@ docker run -d --name elasticsearch --net elastic \
 ```
 docker run --name kib01 -d --net elastic -p 5601:5601 docker.elastic.co/kibana/kibana:9.2.0
 ```
-5**Build the Project**
+5. **Build the Project**
 
 ```bash
 mvn clean package -DskipTests
 ```
 
-6**Run the Spring Boot Application**
+6. **Run the Spring Boot Application**
 
 ```bash
 java -jar target/springai-ollama-rag.jar
