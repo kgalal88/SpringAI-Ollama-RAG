@@ -140,12 +140,16 @@ You can test via Postman, curl, or any HTTP tool:
 curl --location 'http://localhost:9092/rag/ingestPdf' \
 --form 'file=@"/D:/materials/Khalid_Elmetwally.pdf"'
 ```
+<img width="1135" height="464" alt="image" src="https://github.com/user-attachments/assets/e7e7c16a-53d9-43e3-868f-a4f4548acb67" />
+
 **Query LLM**
 ```bash
 curl --location 'http://localhost:9092/rag/query' \
 --header 'Content-Type: text/plain' \
 --data 'Who is Khalid Elmetwally?'
 ```
+<img width="1348" height="468" alt="image" src="https://github.com/user-attachments/assets/d5726454-e1dd-4899-b889-35950a119180" />
+
 
 ---
 
