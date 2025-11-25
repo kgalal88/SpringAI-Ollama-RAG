@@ -93,40 +93,11 @@ java -jar target/springai-ollama-rag.jar
 
 ### **POST /api/rag/ingestPdf**
 
-Send a question and receive an answer augmented with indexed context.
-
-Example Request:
-
-```json
-file=@"/D:/materials/Khalid_Elmetwally.pdf
-```
-
-Example Response:
-
-```json
-PDF ingested successfully! File: Khalid_Elmetwally.pdf
-```
+Upload a PDF file for document ingestion to be embedded to Elsatic Search Vector Database.
 
 ### **POST /api/rag/query**
 
 Send a question and receive an answer augmented with indexed context.
-
-Example Request:
-
-```json
-{
-  "query": "Who is Khalid Elmetwally?"
-}
-```
-
-Example Response:
-
-```json
-{
-  "answer": "According to the document, Khalid Elmetwally is a Google Cloud (GCP) Certified Professional Cloud Architect with 15+ years of experience in designing and implementing software solutions. He currently works as a Software Solutions Architect at Saudi Telecom Company (STC Group) in Riyadh, Saudi Arabia.
-Found at page: 1 of the manual Khalid_Elmetwally.pdf"
-}
-```
 
 ---
 
