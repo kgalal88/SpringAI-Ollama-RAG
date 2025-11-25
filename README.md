@@ -176,12 +176,3 @@ This project is open-source under the **Apache-2.0 License**.
 ## 👤 Author
 
 **Khalid Galal**
-
-If you want me to also generate:
-
-* `CONTRIBUTING.md`
-* API documentation with examples
-* A full architecture diagram
-
-Just tell me!
-
