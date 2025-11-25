@@ -55,13 +55,13 @@ curl -fsSL https://ollama.ai/install.sh | sh
 2. **Pull an LLM Model** (example: llama3)
 
 ```bash
-ollama pull llama3
+ollama pull gemma3
 ```
 
 3. **Run the Model**
 
 ```bash
-ollama run llama3
+ollama run gemma3
 ```
 4. **Run Elastic Search & Kibana**
 ```
@@ -153,6 +153,10 @@ curl --location 'http://localhost:9092/rag/query' \
 
 **Elsatic Search Index (Vector Database)**
 <img width="1906" height="566" alt="image" src="https://github.com/user-attachments/assets/02b704b4-780c-4cfd-90c0-2456d0f60634" />
+
+**Ollama Processes**
+<img width="887" height="76" alt="image" src="https://github.com/user-attachments/assets/54a70b05-3934-4e69-b62e-b4ff812dc9d5" />
+
 
 ---
 
