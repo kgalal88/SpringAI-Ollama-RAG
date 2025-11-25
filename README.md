@@ -93,7 +93,7 @@ java -jar target/springai-ollama-rag.jar
 
 ### **POST /api/rag/ingestPdf**
 
-Upload a PDF file for document ingestion to be embedded to Elsatic Search Vector Database.
+Upload a PDF file for document ingestion to be embedded to Elsatic Search Index (Vector Database).
 
 ### **POST /api/rag/query**
 
@@ -135,6 +135,7 @@ docker run -d -p 9092:8080 --name my-ai-rag-ollama-app --net elastic chat-rag-ol
 ## 🧪 Testing the RAG Flow
 
 You can test via Postman, curl, or any HTTP tool:
+
 **Document Ingestion (Embeding)**
 ```bash
 curl --location 'http://localhost:9092/rag/ingestPdf' \
@@ -150,6 +151,8 @@ curl --location 'http://localhost:9092/rag/query' \
 ```
 <img width="1348" height="468" alt="image" src="https://github.com/user-attachments/assets/d5726454-e1dd-4899-b889-35950a119180" />
 
+**Elsatic Search Index (Vector Database)**
+<img width="1906" height="566" alt="image" src="https://github.com/user-attachments/assets/02b704b4-780c-4cfd-90c0-2456d0f60634" />
 
 ---
 
