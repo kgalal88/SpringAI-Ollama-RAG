@@ -52,7 +52,7 @@ SpringAI-Ollama-RAG/
 curl -fsSL https://ollama.ai/install.sh | sh
 ```
 
-2. **Pull an LLM Model** (example: llama3)
+2. **Pull an LLM Model** (example: gemma3)
 
 ```bash
 ollama pull gemma3
