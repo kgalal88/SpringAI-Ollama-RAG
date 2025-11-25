@@ -143,7 +143,7 @@ curl --location 'http://localhost:9092/rag/ingestPdf' \
 ```
 <img width="1135" height="464" alt="image" src="https://github.com/user-attachments/assets/e7e7c16a-53d9-43e3-868f-a4f4548acb67" />
 
-**Query LLM**
+**Query LLM (with RAG)**
 ```bash
 curl --location 'http://localhost:9092/rag/query' \
 --header 'Content-Type: text/plain' \
@@ -157,6 +157,8 @@ curl --location 'http://localhost:9092/rag/query' \
 **Ollama Processes**
 <img width="887" height="76" alt="image" src="https://github.com/user-attachments/assets/54a70b05-3934-4e69-b62e-b4ff812dc9d5" />
 
+**Query LLM (without RAG)**
+<img width="970" height="315" alt="image" src="https://github.com/user-attachments/assets/8226e6cf-2f5c-4398-930f-966de7ce487f" />
 
 ---
 
